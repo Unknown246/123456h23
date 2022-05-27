@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://PNG/3d2b5b0679920084.png" type="Texture" id=1]
+[ext_resource path="res://PNG/Без имени.png" type="Texture" id=2]
+
+[node name="БезИмени" type="Sprite"]
+position = Vector2( 293.936, 1154.31 )
+scale = Vector2( 5.99504, 6.21398 )
+texture = ExtResource( 2 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( -10.6682, -0.0153809 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+color = Color( 0.968627, 1, 0, 1 )
+shadow_enabled = true

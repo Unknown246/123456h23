@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/projectile.gd" type="Script" id=1]
+[ext_resource path="res://pjt.png" type="Texture" id=2]
+
+[node name="RayCast2D" type="RayCast2D"]
+position = Vector2( -100, 0 )
+enabled = true
+cast_to = Vector2( 0, 0 )
+script = ExtResource( 1 )
+speed = 300.0
+visual_part = NodePath("Node2D")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Pjt" type="Sprite" parent="Node2D"]
+texture = ExtResource( 2 )

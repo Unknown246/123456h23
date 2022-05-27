@@ -1,0 +1,95 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
+[ext_resource path="res://3d2b5b0679920084.png" type="Texture" id=2]
+[ext_resource path="res://PNG/874389342.png" type="Texture" id=3]
+[ext_resource path="res://13a51d065b0e4934.png" type="Texture" id=4]
+
+[sub_resource type="GDScript" id=7]
+script/source = "extends Label
+
+export var player_path : NodePath
+
+func _process(delta):
+	if player_path:
+		var player : Player = get_node_or_null(player_path) as Player
+		if player:
+			text = \"HP: \" + str(player.HP) + \"/\" + str(player.max_HP)
+
+"
+
+[node name="player" type="KinematicBody2D" groups=["player"]]
+script = ExtResource( 1 )
+respawn_timeout = 1.0
+speed = 300.0
+faction = 1
+
+[node name="shoot_ray" type="RayCast2D" parent="."]
+z_index = 100
+enabled = true
+cast_to = Vector2( 500, 0 )
+
+[node name="Icon" type="Sprite" parent="."]
+rotation = 1.5708
+z_index = 10
+z_as_relative = false
+texture = ExtResource( 3 )
+
+[node name="lightaroundplayer" type="Light2D" parent="."]
+z_index = 10
+z_as_relative = false
+texture = ExtResource( 2 )
+texture_scale = 1.83
+range_height = 1.0
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+
+[node name="flashlight" type="Light2D" parent="."]
+scale = Vector2( 3, 2 )
+texture = ExtResource( 4 )
+offset = Vector2( 28, 0 )
+texture_scale = 2.0
+range_height = 1.0
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+
+[node name="visibility" type="Light2D" parent="."]
+z_as_relative = false
+texture = ExtResource( 2 )
+texture_scale = 5.0
+color = Color( 0.0941176, 0.0941176, 0.0941176, 1 )
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+rotation = 1.5708
+polygon = PoolVector2Array( -0.739365, -51.5984, 6.8008, -50.2094, 15.1346, -46.2409, 20.2937, -39.4945, 25.8646, -27.9158, 28.4291, -4.1748, 20.0953, 7.33385, 11.1204, 24.3958, 5.83736, 48.5753, -1.59565, 51.2889, -7.40021, 28.605, -17.2218, 8.68133, -28.4464, -13.4873, -27.8851, -28.9212, -24.5178, -36.7784, -13.2931, -48.8448 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -600.0
+margin_right = 1477.63
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -74.0
+margin_right = 363.0
+
+[node name="HP_readout" type="Label" parent="CanvasLayer/Control/Panel"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = -67.0
+margin_right = 91.0
+margin_bottom = -47.0
+rect_scale = Vector2( 4, 4 )
+text = "HP: N/A / N/A"
+script = SubResource( 7 )
+player_path = NodePath("../../../..")
